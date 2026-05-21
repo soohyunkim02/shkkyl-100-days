@@ -47,20 +47,81 @@
       text-align: center;
       padding-top: 100px;
     }
+    #dots {
+  display: flex;
+  gap: 14px;
+  margin: 25px 0;
+}
+
+#dots span {
+  width: 14px;
+  height: 14px;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+#dots span.filled {
+  background: white;
+}
+
+#keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 70px);
+  gap: 14px;
+}
+
+#keypad button {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 24px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.shake {
+  animation: shake 0.35s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
   </style>
 </head>
 
 <body>
+ <body>
   <div id="login">
     <h1>비밀번호를 입력하시오</h1>
-    <input id="password" type="password" placeholder="password" />
-    <button onclick="checkPassword()">enter</button>
-    <p id="hint"
-      style="display:none; opacity:0.6; margin-top:10px;">
-      힌트 : 우리 만나기 시작한 날 ! 이걸 세번이나 틀려? 진짜 이따 두고봐라ㅡㅡ...
-</p>
 
-<p id="message"></p>
+    <div id="dots">
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+    <div id="keypad">
+      <button onclick="pressNumber('1')">1</button>
+      <button onclick="pressNumber('2')">2</button>
+      <button onclick="pressNumber('3')">3</button>
+      <button onclick="pressNumber('4')">4</button>
+      <button onclick="pressNumber('5')">5</button>
+      <button onclick="pressNumber('6')">6</button>
+      <button onclick="pressNumber('7')">7</button>
+      <button onclick="pressNumber('8')">8</button>
+      <button onclick="pressNumber('9')">9</button>
+      <button onclick="deleteNumber()">⌫</button>
+      <button onclick="pressNumber('0')">0</button>
+      <button onclick="clearPass()">clear</button>
+    </div>
+
+    <p id="message"></p>
+
+    <p id="hint" style="display:none; opacity:0.6;">
+      hint: our first day ♡
+    </p>
   </div>
 
   <div id="home">
@@ -69,28 +130,65 @@
   </div>
 
   <script>
-  let attempts = 0;
+    const correctPassword = "0214";
+    let inputPassword = "";
+    let attempts = 0;
 
-  function checkPassword() {
-    const password = document.getElementById("password").value;
+    function pressNumber(num) {
+      if (inputPassword.length >= 4) return;
 
-    if (password === "0214") {
+      inputPassword += num;
+      updateDots();
 
-      document.getElementById("login").style.display = "none";
-      document.getElementById("home").style.display = "block";
-
-    } else {
-
-      attempts++;
-
-      document.getElementById("message").innerText =
-        "비밀번호가 일치하지 않습니다 :(";
-
-      if (attempts >= 3) {
-        document.getElementById("hint").style.display = "block";
+      if (inputPassword.length === 4) {
+        setTimeout(checkPassword, 200);
       }
     }
-  }
-</script>
+
+    function deleteNumber() {
+      inputPassword = inputPassword.slice(0, -1);
+      updateDots();
+    }
+
+    function clearPass() {
+      inputPassword = "";
+      updateDots();
+      document.getElementById("message").innerText = "";
+    }
+
+    function updateDots() {
+      const dots = document.querySelectorAll("#dots span");
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("filled", index < inputPassword.length);
+      });
+    }
+
+    function checkPassword() {
+      if (inputPassword === correctPassword) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("home").style.display = "block";
+      } else {
+        attempts++;
+        inputPassword = "";
+        updateDots();
+
+        const login = document.getElementById("login");
+        login.classList.add("shake");
+
+        setTimeout(() => {
+          login.classList.remove("shake");
+        }, 400);
+
+        document.getElementById("message").innerText =
+          "비밀번호가 일치하지 않습니다 :(";
+
+        if (attempts >= 3) {
+          document.getElementById("hint").style.display = "block";
+        }
+      }
+    }
+  </script>
+</body>
 </body>
 </html>
