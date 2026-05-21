@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>100 Days</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    #login {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      background: pink;
+      cursor: pointer;
+    }
+
+    #home {
+      display: none;
+      text-align: center;
+      padding-top: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="login">
+    <h1>enter password ♡</h1>
+    <input id="password" type="password" placeholder="password" />
+    <button onclick="checkPassword()">enter</button>
+    <p id="message"></p>
+  </div>
+
+  <div id="home">
+    <h1>happy 100 days ♡</h1>
+    <p>you made it in :)</p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+
+      if (password === "100days") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("home").style.display = "block";
+      } else {
+        document.getElementById("message").innerText = "wrong password :(";
+      }
+    }
+  </script>
+</body>
+</html>
