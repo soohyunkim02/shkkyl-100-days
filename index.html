@@ -52,7 +52,12 @@
     <h1>비밀번호를 입력하시오</h1>
     <input id="password" type="password" placeholder="password" />
     <button onclick="checkPassword()">enter</button>
-    <p id="message"></p>
+    <p id="hint"
+      style="display:none; opacity:0.6; margin-top:10px;">
+      힌트 : 우리 만나기 시작한 날 ! 이걸 세번이나 틀려? 진짜 이따 두고봐라ㅡㅡ...
+</p>
+
+<p id="message"></p>
   </div>
 
   <div id="home">
@@ -61,16 +66,28 @@
   </div>
 
   <script>
-    function checkPassword() {
-      const password = document.getElementById("password").value;
+  let attempts = 0;
 
-      if (password === "0214") {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("home").style.display = "block";
-      } else {
-        document.getElementById("message").innerText = "비밀번호가 일치하지 않습니다 :(";
+  function checkPassword() {
+    const password = document.getElementById("password").value;
+
+    if (password === "0214") {
+
+      document.getElementById("login").style.display = "none";
+      document.getElementById("home").style.display = "block";
+
+    } else {
+
+      attempts++;
+
+      document.getElementById("message").innerText =
+        "비밀번호가 일치하지 않습니다 :(";
+
+      if (attempts >= 3) {
+        document.getElementById("hint").style.display = "block";
       }
     }
-  </script>
+  }
+</script>
 </body>
 </html>
