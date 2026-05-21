@@ -49,26 +49,26 @@
 
 <body>
   <div id="login">
-    <h1>enter password ♡</h1>
+    <h1>비밀번호를 입력하시오</h1>
     <input id="password" type="password" placeholder="password" />
     <button onclick="checkPassword()">enter</button>
     <p id="message"></p>
   </div>
 
   <div id="home">
-    <h1>happy 100 days ♡</h1>
-    <p>you made it in :)</p>
+    <h1>100일 축하해!</h1>
+    <p>비밀번호 맞췄네 :)</p>
   </div>
 
   <script>
     function checkPassword() {
       const password = document.getElementById("password").value;
 
-      if (password === "100days") {
+      if (password === "0214") {
         document.getElementById("login").style.display = "none";
         document.getElementById("home").style.display = "block";
       } else {
-        document.getElementById("message").innerText = "wrong password :(";
+        document.getElementById("message").innerText = "비밀번호가 일치하지 않습니다 :(";
       }
     }
   </script>
