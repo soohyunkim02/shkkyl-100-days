@@ -10,6 +10,13 @@
   <title>100 days</title>
 
   <style>
+      .date-btn.active {
+  background: #ffd8e8;
+
+  color: #ff4f93;
+
+  transform: scale(0.96);
+}
  .memory-text {
   max-width: 650px;
 
@@ -116,7 +123,7 @@
     자 이제 밑에 날짜 하나씩 눌러가면서 우리 추억을 떠올려볼까?
   </p>
 <script>
-    function showSection(id) {
+    function showSection(id, button) {
 
   document.querySelectorAll('.memory-section')
     .forEach(section => {
@@ -124,21 +131,40 @@
     });
 
   document.getElementById(id).style.display = 'block';
+
+  document.querySelectorAll('.date-btn')
+    .forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+  button.classList.add('active');
 }
 </script>
 <div class="dates">
-  <button onclick="showSection('day1')">02.07</button>
-  <button onclick="showSection('day2')">02.14</button>
-  <button onclick="showSection('day3')">03.28</button>
-  <button onclick="showSection('day4')">03.29</button>
-  <button onclick="showSection('day5')">03.30</button>
-  <button onclick="showSection('day6')">03.31</button>
-  <button onclick="showSection('day7')">04.01</button>
-  <button onclick="showSection('day8')">04.02</button>
-  <button onclick="showSection('day9')">04.03</button>
-  <button onclick="showSection('day10')">04.04</button>
-  <button onclick="showSection('day11')">04.29</button>
-  <button onclick="showSection('day12')">05.24</button>
+  <button class="date-btn"
+onclick="showSection('day1', this)">02.07</button>
+  <button class="date-btn"
+onclick="showSection('day2', this)">02.14</button>
+  <button class="date-btn"
+onclick="showSection('day3', this)">03.28</button>
+  <button class="date-btn"
+onclick="showSection('day4', this)">03.29</button>
+  <button class="date-btn"
+onclick="showSection('day5', this)">03.30</button>
+  <button class="date-btn"
+onclick="showSection('day6', this)">03.31</button>
+  <button class="date-btn"
+onclick="showSection('day7', this)">04.01</button>
+  <button class="date-btn"
+onclick="showSection('day8', this)">04.02</button>
+  <button class="date-btn"
+onclick="showSection('day9', this)">04.03</button>
+  <button class="date-btn"
+onclick="showSection('day10', this)">04.04</button>
+  <button class="date-btn"
+onclick="showSection('day11', this)">04.29</button>
+  <button class="date-btn"
+onclick="showSection('day12', this)">05.24</button>
 </div>
    <div id="day1" class="memory-section">
   <h2>02.07</h2>
