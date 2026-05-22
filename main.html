@@ -10,6 +10,10 @@
   <title>100 days</title>
 
   <style>
+      .memory-section {
+  display: none;
+}
+      
       .dates {
   display: flex;
   flex-wrap: wrap;
@@ -86,7 +90,17 @@
     내가 항상 고맙고 너무 많이 사랑해 ㅎㅎ<br>
     밑에 날짜 하나씩 눌러가면서 우리 추억을 떠올려볼까?
   </p>
+<script>
+    function showSection(id) {
 
+  document.querySelectorAll('.memory-section')
+    .forEach(section => {
+      section.style.display = 'none';
+    });
+
+  document.getElementById(id).style.display = 'block';
+}
+</script>
 <div class="dates">
   <button onclick="showSection('day1')">02.07</button>
   <button onclick="showSection('day2')">02.14</button>
