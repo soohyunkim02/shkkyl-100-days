@@ -126,14 +126,22 @@
 
   <div id="home">
     <h1>100일 축하해!</h1>
-    <p>비밀번호 맞췄네 :)</p>
-  </div>
+    <p>비밀번호 맞췄네 :)
+    이제 준비한걸 보러 가볼까?</p>
+    <button onclick="main()">보러가기</button>
 
+  </div>
+   
   <script>
     const correctPassword = "0214";
     let inputPassword = "";
     let attempts = 0;
 
+    function main() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("mainpage").style.display = "block";
+}
+    
     function pressNumber(num) {
       if (inputPassword.length >= 4) return;
 
@@ -189,6 +197,7 @@
       }
     }
   </script>
+   
 </body>
 </body>
 </html>
